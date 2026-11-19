@@ -1,0 +1,23 @@
+CREATE DATABASE IF NOT EXISTS empresa_db,
+USE empresa_db;
+
+CREATE TABLE IF NOT EXISTS funcionarios (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    email VARCHAR(150) NOT NULL,
+    salario DECIMAL(10,2) NOT NULL,
+    tipo VARCHAR(30) NOT NULL,
+);
+
+<?php
+$host = "localhost";
+$dbname = "empresa";
+$usuario = "root";
+$senha = "";
+$charset = "utf8mb4";
+
+
+try
+
+
+
