@@ -1,0 +1,101 @@
+OBJETIVO
+Desenvolver um sistema web de gerenciamento de funcionários utilizando Programação Orientada a Objetos (POO), arquitetura MVC (Model, View e Controller), 
+formulários HTML, métodos HTTP GET e POST, sessões PHP e banco de dados MySQL.
+
+
+1. ESTRUTURA MVC
+Organize o projeto em pastas separadas:
+- models/ — Classes e regras de negócio.
+- views/ — Páginas HTML e formulários.
+- controllers/ — Processamento das requisições.
+- config/ — Conexão com o banco de dados.
+- index.php — Página inicial do sistema.
+Utilize require_once ou include_once para importar os arquivos necessários.
+A organização deve permitir identificar claramente as responsabilidades de cada camada.
+
+
+2. PROGRAMAÇÃO ORIENTADA A OBJETOS
+Crie uma classe abstrata chamada Funcionario, contendo:
+Atributos:
+- Nome
+- E-mail
+- Salário
+
+
+Requisitos:
+- Utilizar atributos private ou protected, conforme a necessidade.
+- Implementar construtor.
+- Implementar métodos getters e setters.
+- Criar um método abstrato calcularBonus().
+
+Crie duas classes filhas:
+FuncionarioComum:
+- Deve herdar de Funcionario.
+- Deve implementar calcularBonus(), retornando 5% do salário.
+Gerente:
+- Deve herdar de Funcionario.
+- Deve implementar calcularBonus(), retornando 15% do salário.
+
+As classes devem demonstrar corretamente os quatro pilares da POO:
+- Encapsulamento.
+- Herança.
+- Polimorfismo.
+- Abstração.
+O cálculo de bônus deve ser realizado por meio dos métodos das classes, e não diretamente nas páginas HTML.
+
+
+3. BANCO DE DADOS MYSQL
+Crie um banco de dados chamado empresa_db.
+Crie uma tabela funcionarios com os campos:
+- id — INT, chave primária e auto incremento.
+- nome — VARCHAR(100), obrigatório.
+- email — VARCHAR(150), obrigatório.
+- salario — DECIMAL(10,2), obrigatório.
+- tipo — VARCHAR(30), obrigatório.
+Implemente a conexão utilizando PDO.
+
+
+O sistema deverá permitir:
+- Cadastrar funcionários.
+- Listar funcionários.
+- Excluir funcionários.
+Os registros devem permanecer armazenados no MySQL mesmo após fechar o navegador.
+
+
+4. FORMULÁRIOS E MÉTODOS HTTP
+Desenvolva um formulário HTML para cadastrar funcionários.
+O formulário deverá conter nome, e-mail, salário e tipo de funcionário.
+Requisitos:
+- Utilizar method="POST" para cadastrar.
+- Receber os dados com $_POST.
+- Utilizar $_SERVER["REQUEST_METHOD"] para verificar o método da requisição.
+- Utilizar $_GET para identificar o funcionário que será excluído.
+- Verificar se os campos obrigatórios foram preenchidos.
+A exclusão deve exigir confirmação por formulário POST antes de alterar o banco de dados.
+
+
+5. SESSÕES PHP
+Implemente uma funcionalidade utilizando $_SESSION.
+O sistema deverá:
+- Registrar o nome do operador em uma sessão.
+- Exibir uma mensagem de boas-vindas com esse nome.
+- Manter o nome disponível durante a navegação.
+- Disponibilizar um botão para encerrar a sessão.
+Não é necessário implementar autenticação com senha.
+
+
+6. INTERFACE E FUNCIONAMENTO
+Crie uma interface HTML organizada, utilizando CSS.
+A página principal deverá apresentar:
+- Formulário de cadastro.
+- Lista de funcionários cadastrados.
+- Nome e tipo de cada funcionário.
+- Salário e bônus calculado.
+- Botão de exclusão.
+- Mensagens de sucesso ou erro.
+A apresentação visual será considerada, mas o funcionamento do sistema terá prioridade.
+
+
+ENTREGA .ZIP CONTENDO:
+- Pasta completa do projeto.
+- Arquivo .sql de criação do banco de dados.
