@@ -7,7 +7,7 @@
             <span class="count"><?= count($funcionarios) ?> registro(s)</span>
         </div>
 
-        <?php if (!$funcionarios): ?>
+        <?php if (!$funcionario): ?>
             <p class="empty">Nenhum funcionário cadastrado ainda.</p>
         <?php else: ?>
             <div class="table-wrap">

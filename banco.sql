@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS funcionarios (
     nome VARCHAR(100) NOT NULL,
     email VARCHAR(150) NOT NULL,
     salario DECIMAL(10,2) NOT NULL,
-    tipo VARCHAR(30) NOT NULL,
+    tipo VARCHAR(30) NOT NULL
 );
 
 <?php
@@ -17,7 +17,7 @@ $senha = "";
 $charset = "utf8mb4";
 
 
-try
+
 
 
 
