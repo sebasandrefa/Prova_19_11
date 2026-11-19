@@ -2,8 +2,8 @@
 declare(strict_types=1);
 
 require_once __DIR__ . '/../config/conexao.php';
-require_once __DIR__ . '/../Models/funcionario_comun.php';
-require_once __DIR__ . '/../Models/gerente.php';
+require_once __DIR__ . '/../models/FuncionarioComum.php';
+require_once __DIR__ . '/../models/Gerente.php';
 
 $mensagem = '';
 $erro = '';
@@ -12,7 +12,7 @@ $funcionarioExcluir = null;
 $metodo = $_SERVER['REQUEST_METHOD'] ?? 'GET';
 
 try {
-    // As ações que dependem apenas da sessão não precisam do banco.
+    // Inicia ou encerra a sessão do operador.
     if ($metodo === 'POST') {
         $acao = $_POST['acao'] ?? '';
 
@@ -34,8 +34,10 @@ try {
         }
     }
 
+    // Conecta ao banco para cadastrar, excluir e listar funcionários.
     $pdo = conectarBanco();
 
+    // Trata os formulários enviados pelo método POST.
     if ($metodo === 'POST') {
         $acao = $_POST['acao'] ?? '';
 
@@ -57,8 +59,11 @@ try {
                 throw new InvalidArgumentException('Tipo de funcionário inválido.');
             }
 
-            $classeFuncionario = $tipo === 'gerente' ? Gerente::class : FuncionarioComum::class;
-            $funcionario = new $classeFuncionario($nome, $email, (float) $salarioTexto);
+            if ($tipo === 'gerente') {
+                $funcionario = new Gerente($nome, $email, (float) $salarioTexto);
+            } else {
+                $funcionario = new FuncionarioComum($nome, $email, (float) $salarioTexto);
+            }
             $comando = $pdo->prepare(
                 'INSERT INTO funcionarios (nome, email, salario, tipo) '
                 . 'VALUES (:nome, :email, :salario, :tipo)'
@@ -88,12 +93,14 @@ try {
         }
     }
 
+    // Mostra uma mensagem depois de cadastrar ou excluir.
     if (isset($_GET['sucesso'])) {
         $mensagem = $_GET['sucesso'] === 'exclusao'
             ? 'Funcionário excluído com sucesso.'
             : 'Funcionário cadastrado com sucesso.';
     }
 
+    // O GET informa qual funcionário será excluído após confirmação.
     $excluirId = isset($_GET['excluir'])
         ? filter_var($_GET['excluir'], FILTER_VALIDATE_INT)
         : false;
@@ -104,6 +111,7 @@ try {
         $funcionarioExcluir = $comando->fetch() ?: null;
     }
 
+    // Busca todos os funcionários para mostrar na página.
     $funcionarios = $pdo
         ->query('SELECT id, nome, email, salario, tipo FROM funcionarios ORDER BY nome')
         ->fetchAll();
