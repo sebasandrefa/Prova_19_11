@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 function conectarBanco(): PDO
 {
-    $host = 'localhost';
+    $host = 'sebastian315';
     $dbname = 'empresa_db';
     $usuario = 'root';
     $senha = '';

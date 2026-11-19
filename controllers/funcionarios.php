@@ -12,7 +12,6 @@ $funcionarioExcluir = null;
 $metodo = $_SERVER['REQUEST_METHOD'] ?? 'GET';
 
 try {
-    // Inicia ou encerra a sessão do operador.
     if ($metodo === 'POST') {
         $acao = $_POST['acao'] ?? '';
 
@@ -34,10 +33,8 @@ try {
         }
     }
 
-    // Conecta ao banco para cadastrar, excluir e listar funcionários.
     $pdo = conectarBanco();
 
-    // Trata os formulários enviados pelo método POST.
     if ($metodo === 'POST') {
         $acao = $_POST['acao'] ?? '';
 
@@ -93,14 +90,12 @@ try {
         }
     }
 
-    // Mostra uma mensagem depois de cadastrar ou excluir.
     if (isset($_GET['sucesso'])) {
         $mensagem = $_GET['sucesso'] === 'exclusao'
             ? 'Funcionário excluído com sucesso.'
             : 'Funcionário cadastrado com sucesso.';
     }
 
-    // O GET informa qual funcionário será excluído após confirmação.
     $excluirId = isset($_GET['excluir'])
         ? filter_var($_GET['excluir'], FILTER_VALIDATE_INT)
         : false;
@@ -111,7 +106,6 @@ try {
         $funcionarioExcluir = $comando->fetch() ?: null;
     }
 
-    // Busca todos os funcionários para mostrar na página.
     $funcionarios = $pdo
         ->query('SELECT id, nome, email, salario, tipo FROM funcionarios ORDER BY nome')
         ->fetchAll();
